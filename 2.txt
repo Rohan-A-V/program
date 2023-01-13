@@ -1,0 +1,254 @@
+Lab Program 2
+Write a program to create an Activity to read Employee Details (EmpId, Name, Age, Address) from user and store to database and create a menu with menu item (Show Details) on pressing menu details it must go to another activity with employee id search box and search button and display the employee details on the screen.
+
+Acticity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+   android:gravity="center"
+   android:layout_margin="10dp"
+   tools:context=".MainActivity">
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="20dp"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:text="Employee Id"/>
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt_id"/>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="20dp"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:text="Employee Name"/>
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt_name"/>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="20dp"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:text="Employee Age"/>
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt_age"/>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="20dp"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:text="Employee Address"/>
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt_address"/>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="center">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Submit"
+           android:layout_gravity="center"
+           android:layout_marginRight="8dp"
+           android:id="@+id/btn_submit"/>
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Search"
+           android:layout_gravity="center"
+           android:id="@+id/btn_search"/>
+   </LinearLayout>
+
+</LinearLayout>
+
+MainActivity.java
+package com.example.labdatabase;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements View.OnClickListener {
+   EditText txtid,txtname,txtage,txtaddress;
+   Button btnsubmit,btnsearch;
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       txtid=(EditText)findViewById(R.id.txt_id);
+       txtname=(EditText)findViewById(R.id.txt_name);
+       txtage=(EditText)findViewById(R.id.txt_age);
+       txtaddress=(EditText)findViewById(R.id.txt_address);
+       btnsubmit=(Button)findViewById(R.id.btn_submit);
+       btnsubmit.setOnClickListener(this);
+       btnsearch=(Button)findViewById(R.id.btn_search);
+       btnsearch.setOnClickListener(this);
+   }
+
+   @Override
+   public void onClick(View v) {
+// TODO  Auto generated method stub
+       Toast.makeText(this,"button clicked",Toast.LENGTH_SHORT).show ();
+       if(v.equals(btnsubmit))
+       {
+           String sid=txtid.getText().toString();
+           String sname=txtname.getText().toString();
+           String sage=txtage.getText().toString();
+           String  saddress=txtaddress.getText().toString();
+           MyDatabase dat=new MyDatabase(this,MyDatabase.DATABASE_NAME, null,1);
+           SQLiteDatabase database=dat.getWritableDatabase();
+           ContentValues cv= new ContentValues();
+           cv.put("id", sid);
+           cv.put("name", sname);
+           cv.put("age",sage );
+           cv.put("address",saddress);
+           database.insert("Employee", null,cv); database.close();
+           Toast.makeText(this, "Data Inserted successfully", Toast.LENGTH_SHORT).show();
+       }
+       else if(v.equals(btnsearch))
+       {
+           Intent it=new Intent(this,SearchActivity.class);
+           startActivity(it);
+       }
+   } }
+
+
+Activity_search.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:orientation="vertical"
+   android:gravity="center"
+   android:layout_margin="10dp"
+   android:layout_height="match_parent">
+
+   <TextView
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:textStyle="bold"
+       android:textSize="20dp"
+       android:textColor="@color/black"
+       android:text="Enter Employee id" />
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt_empid"/>
+   <Button
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Search"
+       android:layout_gravity="center"
+       android:id="@+id/txt_search"/>
+   <TextView
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:text="Text view"
+       android:id="@+id/txt_display"/>
+</LinearLayout>
+
+
+SearchActivity.java
+package com.example.labdatabase;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class SearchActivity extends Activity implements View.OnClickListener{
+   EditText txtempid;
+   Button btnsearch;
+   TextView txtdisplay;
+   public void onCreate(Bundle b)
+   {
+       super.onCreate(b);
+       setContentView(R.layout.activity_search);
+       txtempid=(EditText)findViewById(R.id.txt_empid);
+       btnsearch=(Button)findViewById(R.id.txt_search);
+       txtdisplay=(TextView)findViewById(R.id.txt_display);
+       btnsearch.setOnClickListener(this);
+   }
+   @Override
+   public void onClick(View v) {
+// TODO Auto-generated method stub
+       Toast.makeText(this, "Button clicked",Toast.LENGTH_SHORT).show(); if(v.equals(btnsearch))
+       {
+           String eid=txtempid.getText().toString();
+           MyDatabase dat=new MyDatabase(this, MyDatabase.DATABASE_NAME, null,1);
+           SQLiteDatabase database=dat.getReadableDatabase();
+           String[] columns=new String[]{"id","name","age ","address"};
+           String   where="id=?";
+           String[] value= new String[] { eid.trim() };
+           Cursor cu=database.query(MyDatabase.EMPLOYEE_TABLE, columns, where,value, null, null, null);
+           txtdisplay.setText("");
+           if(cu.moveToNext())
+           {
+               String id=cu.getString(0); String
+                   name=cu.getString(1); String
+                   age=cu.getString(2); String
+                   address=cu.getString(3);
+               txtdisplay.append(id+ " " +name+ " "+age+ " "+address+"\n");
+           }
+           else
+           {
+               Toast.makeText(this, "No Id Exist",Toast.LENGTH_SHORT).show();
+           }
+       }
+   }
+}
+
+
+
+Mydatabase.java
+import androidx.annotation.Nullable;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class MyDatabase extends SQLiteOpenHelper{
+    public static final String DATABASE_NAME = "Employee.db";
+    public static final String EMPLOYEE_TABLE = "Employee";
+
+    public MyDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
+        super(context, name, factory, version);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db){
+        db.execSQL("Create Table Employee(id TEXT, name TEXT, age TEXT, address TEXT)");
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1){
+
+    }
+}
+
+Output:

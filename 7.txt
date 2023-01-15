@@ -1,3 +1,5 @@
+ServiceClass.java--------------------------------------------------------------------------
+
 package com.example.notification_064;
 
 import android.app.Notification;
@@ -53,7 +55,7 @@ public class ServiceClass extends Service {
             NotificationManager man = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder= new NotificationCompat.Builder(getBaseContext());
             builder.setContentTitle("from service");
-            builder.setContentText("hi SHIVAPRASAD"+m.what);
+            builder.setContentText("hi "+m.what);
             builder.setSmallIcon(R.drawable.images);
             builder.setContentIntent(PendingIntent.getActivity(getBaseContext(),1,new Intent(getBaseContext(), MainActivity.class), Intent.FILL_IN_ACTION));
             Notification nof=builder.build();
@@ -81,7 +83,7 @@ public class ServiceClass extends Service {
 }
 
 
-
+MianActivity.java--------------------------------------------------------------------------------------
 
 
 package com.example.notification_064;
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
+activity_main.xml------------------------------------------------------------------------------------------------------------------
 
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
+Mainfest.xml--------------------------------------------------------------------------------------------------------
 
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"

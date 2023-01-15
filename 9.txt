@@ -5,143 +5,150 @@ Activity_main.xml---------------------------------------------------------------
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:text="DIALER"
-        android:textStyle="bold"/>
+
     <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_disp"/>
-    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/txt_d">
+
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:id="@+id/btn_one"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_one"
+            android:text="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
-            android:id="@+id/btn_two"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_two"
+            android:text="2"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:id="@+id/btn_three"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:layout_gravity="center"
+            android:id="@+id/btn_three"
+            android:text="3"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
-            android:id="@+id/btn_four" />
+            android:layout_gravity="center"
+            android:id="@+id/btn_four"
+            android:text="4"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
-            android:id="@+id/btn_five"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_five"
+            android:text="5"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6"
-            android:id="@+id/btn_six"   />
+            android:layout_gravity="center"
+            android:id="@+id/btn_six"
+            android:text="6"/>
+
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7"
-            android:id="@+id/btn_seven"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_seven"
+            android:text="7"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8"
-            android:id="@+id/btn_eight"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_eight"
+            android:text="8"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="9"
-            android:id="@+id/btn_nine"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_nine"
+            android:text="9"/>
+
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="#"
-            android:id="@+id/btn_hash"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_hash"
+            android:text="#"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/btn_zero"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_zero"
+            android:text="0"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="*"
-            android:id="@+id/btn_star"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_astk"
+            android:text="*"/>
+
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="call"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/btn_call"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_save"
+
+            android:text="Save"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/btn_save"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_call"
+            android:text="CALL"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="del"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/btn_del"/>
+            android:layout_gravity="center"
+            android:id="@+id/btn_del"
+            android:text="DEL"/>
+
     </LinearLayout>
+
 </LinearLayout>
 
 
@@ -150,90 +157,168 @@ Activity_main.xml---------------------------------------------------------------
 Main_activity.java-----------------------------------------------------------------------------------
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btnzero, btnone, btntwo, btnthree, btnfour, btnfive, btnsix, btnseven, btneight, btnnine, btnhash, btnstar, btncall, btnsave, btndel;
-    EditText txtdisp;
+package com.example.dialpad;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.lang.annotation.Inherited;
+import java.net.URI;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText disp;
+    Button one,two,three,four,five,six,seven,eight,nine,zero,hash,astk,call,save,del;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnone = findViewById(R.id.btn_one);
-        btnone.setOnClickListener(this);
-        btntwo = findViewById(R.id.btn_two);
-        btntwo.setOnClickListener(this);
-        btnthree = findViewById(R.id.btn_three);
-        btnthree.setOnClickListener(this);
-        btnfour = findViewById(R.id.btn_four);
-        btnfour.setOnClickListener(this);
-        btnfive = findViewById(R.id.btn_five);
-        btnfive.setOnClickListener(this);
-        btnsix = findViewById(R.id.btn_six);
-        btnsix.setOnClickListener(this);
-        btnseven = findViewById(R.id.btn_seven);
-        btnseven.setOnClickListener(this);
-        btneight = findViewById(R.id.btn_eight);
-        btneight.setOnClickListener(this);
-        btnnine = findViewById(R.id.btn_nine);
-        btnnine.setOnClickListener(this);
-        btnzero = findViewById(R.id.btn_zero);
-        btnzero.setOnClickListener(this);
-        btnhash = findViewById(R.id.btn_hash);
-        btnhash.setOnClickListener(this);
-        btnstar = findViewById(R.id.btn_star);
-        btnstar.setOnClickListener(this);
-        btncall = findViewById(R.id.btn_call);
-        btncall.setOnClickListener(this);
-        btnsave = findViewById(R.id.btn_save);
-        btnsave.setOnClickListener(this);
-        btndel = findViewById(R.id.btn_del);
-        btndel.setOnClickListener(this);
-        txtdisp = findViewById(R.id.txt_disp);
+        disp = (EditText) findViewById(R.id.txt_d);
+        one = (Button)findViewById(R.id.btn_one);
+        two = (Button)findViewById(R.id.btn_two);
+        three = (Button)findViewById(R.id.btn_three);
+        four = (Button)findViewById(R.id.btn_four);
+        five = (Button)findViewById(R.id.btn_five);
+        six = (Button)findViewById(R.id.btn_six);
+        seven = (Button)findViewById(R.id.btn_seven);
+        eight = (Button)findViewById(R.id.btn_eight);
+        nine=(Button) findViewById(R.id.btn_nine);
+        zero=(Button) findViewById(R.id.btn_zero);
+        hash=(Button) findViewById(R.id.btn_hash);
+        astk=(Button) findViewById(R.id.btn_astk);
+        call=(Button) findViewById(R.id.btn_call);
+        save=(Button) findViewById(R.id.btn_save);
+        del=(Button) findViewById(R.id.btn_del);
+        one.setOnClickListener(this);
+        two.setOnClickListener(this);
+        three.setOnClickListener(this);
+        four.setOnClickListener(this);
+        five.setOnClickListener(this);
+        six.setOnClickListener(this);
+        seven.setOnClickListener(this);
+        eight.setOnClickListener(this);
+        nine.setOnClickListener(this);
+        zero.setOnClickListener(this);
+        hash.setOnClickListener(this);
+        astk.setOnClickListener(this);
+        call.setOnClickListener(this);
+        save.setOnClickListener(this);
+        del.setOnClickListener(this);
     }
 
+    @Override
     public void onClick(View view) {
-
-        if (view.equals(btnone)) {
-            txtdisp.append("1");
-        } else if (view.equals(btntwo)) {
-            txtdisp.append("2");
-        } else if (view.equals(btnthree)) {
-            txtdisp.append("3");
-        } else if (view.equals(btnfour)) {
-            txtdisp.append("4");
-        } else if (view.equals(btnfive)) {
-            txtdisp.append("5");
-        } else if (view.equals(btnsix)) {
-            txtdisp.append("6");
-        } else if (view.equals(btnseven)) {
-            txtdisp.append("7");
-        } else if (view.equals(btneight)) {
-            txtdisp.append("8");
-        } else if (view.equals(btnnine)) {
-            txtdisp.append("9");
-        } else if (view.equals(btnzero)) {
-            txtdisp.append("0");
-        } else if (view.equals(btnhash)) {
-            txtdisp.append("#");
-        } else if (view.equals(btnstar)) {
-            txtdisp.append("*");
-        } else if (view.equals(btndel)) {
-            String num = txtdisp.getText().toString();
-            if (num.length() > 0) {
-                num = num.substring(0, num.length() - 1);
-                txtdisp.setText(num);
+        if(view.equals(one)){
+            disp.append("1");
+        }
+        else if(view.equals(two))
+        {
+            disp.append("2");
+        }
+        else if(view.equals(three))
+        {
+            disp.append("3");
+        }
+        else if(view.equals(four))
+        {
+            disp.append("4");
+        }
+        else if(view.equals(five))
+        {
+            disp.append("5");
+        }
+        else if(view.equals(six))
+        {
+            disp.append("6");
+        }
+        else if(view.equals(seven))
+        {
+            disp.append("7");
+        }
+        else if(view.equals(eight))
+        {
+            disp.append("8");
+        }
+        else if(view.equals(nine))
+        {
+            disp.append("9");
+        }
+        else if(view.equals(zero))
+        {
+            disp.append("0");
+        }
+        else if(view.equals(hash))
+        {
+            disp.append("#");
+        }
+        else if(view.equals(astk))
+        {
+            disp.append("*");
+        }
+        else if(view.equals(del))
+        {
+            String num = disp.getText().toString();
+            if(num.length()>0)
+            {
+                num = num.substring(0,num.length()-1);
             }
-        } else if (view.equals(btncall)) {
-            String num = txtdisp.getText().toString();
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:"+num));
-            startActivity(intent);
-        } else if (view.equals(btnsave)) {
-            String num = txtdisp.getText().toString();
-            Intent it1 = new Intent(Intent.ACTION_INSERT,ContactsContract.Contacts.CONTENT_URI);
-            it1.putExtra(ContactsContract.Intents.Insert.PHONE, num);
+            disp.setText(num);
+        }
+        else if(view.equals(call))
+        {
+            String num = disp.getText().toString();
+            Intent it1 = new Intent(Intent.ACTION_DIAL);
+            it1.setData(Uri.parse("tel: "+num));
             startActivity(it1);
         }
-
+        else if(view.equals(save))
+        {
+            String num = disp.getText().toString();
+            Intent it2 = new Intent(Intent.ACTION_INSERT,ContactsContract.Contacts.CONTENT_URI);
+            it2.putExtra(ContactsContract.Intents.Insert.PHONE,num);
+            startActivity(it2);
+        }
     }
 }
+
+
+manifest.xml------------------------------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Dialpad"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+    </application>
+
+</manifest>

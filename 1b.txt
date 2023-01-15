@@ -1,0 +1,86 @@
+activity_main.xml---------------------------------------------------------------------------------------------------
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Convert TEXT to SPEECH"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/txt_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:textSize="30dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_tts"
+        android:textSize="20dp"
+        android:text="Convert"/>
+</LinearLayout>
+
+
+
+MainActivity.java--------------------------------------------------------------------------------------
+
+
+package com.example.texttospeech;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.speech.tts.TextToSpeech;
+import android.widget.Button;
+import android.widget.Toast;
+import android.widget.EditText;
+import android.view.View;
+import java.util.Locale;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+    TextToSpeech t1;
+    EditText txtinput;
+    Button txttosppech;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        txtinput = findViewById(R.id.txt_input);
+        txttosppech = findViewById(R.id.btn_tts);
+        t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i!=TextToSpeech.ERROR){
+                    t1.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
+        txttosppech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tospeak = txtinput.getText().toString();
+                Toast.makeText(getBaseContext(),tospeak, Toast.LENGTH_SHORT).show();
+                t1.speak(tospeak,TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+    }
+    public void onPause(){
+        if (t1!=null){
+            t1.stop();
+            t1.shutdown();
+        }
+        super.onPause();
+    }
+}

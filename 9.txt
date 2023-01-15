@@ -1,0 +1,239 @@
+Activity_main.xml----------------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:text="DIALER"
+        android:textStyle="bold"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_disp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/btn_one"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:id="@+id/btn_two"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id="@+id/btn_three"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:id="@+id/btn_four" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/btn_five"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:id="@+id/btn_six"   />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:id="@+id/btn_seven"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:id="@+id/btn_eight"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9"
+            android:id="@+id/btn_nine"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:id="@+id/btn_hash"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/btn_zero"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:id="@+id/btn_star"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="call"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/btn_call"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/btn_save"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="del"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/btn_del"/>
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+Main_activity.java-----------------------------------------------------------------------------------
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button btnzero, btnone, btntwo, btnthree, btnfour, btnfive, btnsix, btnseven, btneight, btnnine, btnhash, btnstar, btncall, btnsave, btndel;
+    EditText txtdisp;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btnone = findViewById(R.id.btn_one);
+        btnone.setOnClickListener(this);
+        btntwo = findViewById(R.id.btn_two);
+        btntwo.setOnClickListener(this);
+        btnthree = findViewById(R.id.btn_three);
+        btnthree.setOnClickListener(this);
+        btnfour = findViewById(R.id.btn_four);
+        btnfour.setOnClickListener(this);
+        btnfive = findViewById(R.id.btn_five);
+        btnfive.setOnClickListener(this);
+        btnsix = findViewById(R.id.btn_six);
+        btnsix.setOnClickListener(this);
+        btnseven = findViewById(R.id.btn_seven);
+        btnseven.setOnClickListener(this);
+        btneight = findViewById(R.id.btn_eight);
+        btneight.setOnClickListener(this);
+        btnnine = findViewById(R.id.btn_nine);
+        btnnine.setOnClickListener(this);
+        btnzero = findViewById(R.id.btn_zero);
+        btnzero.setOnClickListener(this);
+        btnhash = findViewById(R.id.btn_hash);
+        btnhash.setOnClickListener(this);
+        btnstar = findViewById(R.id.btn_star);
+        btnstar.setOnClickListener(this);
+        btncall = findViewById(R.id.btn_call);
+        btncall.setOnClickListener(this);
+        btnsave = findViewById(R.id.btn_save);
+        btnsave.setOnClickListener(this);
+        btndel = findViewById(R.id.btn_del);
+        btndel.setOnClickListener(this);
+        txtdisp = findViewById(R.id.txt_disp);
+    }
+
+    public void onClick(View view) {
+
+        if (view.equals(btnone)) {
+            txtdisp.append("1");
+        } else if (view.equals(btntwo)) {
+            txtdisp.append("2");
+        } else if (view.equals(btnthree)) {
+            txtdisp.append("3");
+        } else if (view.equals(btnfour)) {
+            txtdisp.append("4");
+        } else if (view.equals(btnfive)) {
+            txtdisp.append("5");
+        } else if (view.equals(btnsix)) {
+            txtdisp.append("6");
+        } else if (view.equals(btnseven)) {
+            txtdisp.append("7");
+        } else if (view.equals(btneight)) {
+            txtdisp.append("8");
+        } else if (view.equals(btnnine)) {
+            txtdisp.append("9");
+        } else if (view.equals(btnzero)) {
+            txtdisp.append("0");
+        } else if (view.equals(btnhash)) {
+            txtdisp.append("#");
+        } else if (view.equals(btnstar)) {
+            txtdisp.append("*");
+        } else if (view.equals(btndel)) {
+            String num = txtdisp.getText().toString();
+            if (num.length() > 0) {
+                num = num.substring(0, num.length() - 1);
+                txtdisp.setText(num);
+            }
+        } else if (view.equals(btncall)) {
+            String num = txtdisp.getText().toString();
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:"+num));
+            startActivity(intent);
+        } else if (view.equals(btnsave)) {
+            String num = txtdisp.getText().toString();
+            Intent it1 = new Intent(Intent.ACTION_INSERT,ContactsContract.Contacts.CONTENT_URI);
+            it1.putExtra(ContactsContract.Intents.Insert.PHONE, num);
+            startActivity(it1);
+        }
+
+    }
+}

@@ -1,0 +1,310 @@
+CONTENT PROVIDER PART
+
+activity_main.xml--------------------------------------------------------------------------------
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter date"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_date"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Notes"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_cont"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insert"
+        android:id="@+id/btn_insert"/>
+
+</LinearLayout>
+
+
+
+MainActivity.java----------------------------------------------------------------------------------------------
+
+
+
+
+
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.net.Uri;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    EditText date, note;
+    Button insert;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        date = (EditText) findViewById(R.id.txt_date);
+        note = (EditText) findViewById(R.id.txt_cont);
+        insert = (Button) findViewById(R.id.btn_insert);
+        insert.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.equals(insert)) {
+            String n_d = date.getText().toString();
+            String n_c = note.getText().toString();
+            ContentValues cv = new ContentValues();
+            cv.put("note_date" , n_d);
+            cv.put("note_content", n_c);
+            ContentResolver cr = getContentResolver();
+            cr.insert(Uri.parse("content://com.example.noteprovider/notes"),cv);
+            Toast.makeText(this,"Insert Successful",Toast.LENGTH_LONG).show();
+        }
+    }
+}
+
+
+
+MyDb.java------------------------------------------------------------------------------------------------------------------
+
+
+
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.Nullable;
+
+public class MyDb extends SQLiteOpenHelper {
+    public static String DATABASE_NAME = "noteprovider.db";
+    public static String TABLE_NAME = "notes";
+    public MyDb(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE notes (note_date TEXT, note_content TEXT)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+
+    }
+}
+
+
+
+NotesProvider.java------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+public class NotesProvider extends ContentProvider {
+    MyDb d;
+    SQLiteDatabase db;
+
+    @Override
+    public boolean onCreate() {
+        d = new MyDb(getContext(),MyDb.DATABASE_NAME,null,1);
+        return (d == null)? false:true;
+    }
+
+    @Nullable
+    @Override
+    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+        Cursor c =null;
+        db = d.getReadableDatabase();
+        c = db.query(MyDb.TABLE_NAME,strings, s, strings1, s1, null, null);
+        return c;
+    }
+
+    @Nullable
+    @Override
+    public String getType(@NonNull Uri uri) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Uri insert(@NonNull Uri uri, @Nullable ContentValues cv) {
+        db = d.getWritableDatabase();
+        db.insert(MyDb.TABLE_NAME,null, cv);
+        db.close();
+        return null;
+    }
+
+    @Override
+    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
+        return 0;
+    }
+
+    @Override
+    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
+        return 0;
+    }
+}
+
+
+
+Mainfest.xml-------------------------------------------------------------------------------------------------
+
+
+</activity>
+        <provider
+            android:authorities="com.example.noteprovider"
+            android:name=".NotesProvider"
+            android:exported="true"/>
+    </application>
+    
+  
+  
+  
+  
+****************************************************************************************************************************************************************** 
+
+
+
+CONTENT RESOLVER PART
+ 
+ activity_main.xml--------------------------------------------------------------------------------
+ 
+ <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter date" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_date">
+
+    </EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Serach"
+        android:id="@+id/btn_search"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_disp"/>
+
+
+</LinearLayout>
+
+
+
+
+
+MainActivity.java----------------------------------------------------------------------------------------------
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    TextView disp;
+    EditText date;
+    Button search;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        disp = (TextView) findViewById(R.id.txt_disp);
+        date = (EditText) findViewById(R.id.txt_date);
+        search = (Button) findViewById(R.id.btn_search);
+        search.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        String sdate = date.getText().toString();
+        if (view.equals(search)) {
+
+            String where = "note_date=?";
+            Cursor cursor = getContentResolver().query(Uri.parse("content://com.example.noteprovider/notes"), new String[]
+                    {"note_date", "note_content"}, where, new String[]
+                    {sdate.trim()}, null,null);
+
+            if (cursor != null && cursor.moveToNext()) {
+
+                String ndate = cursor.getString(0);
+                String content = cursor.getString(1);
+                disp.setText(ndate + " " + content + "\n");
+            }
+            else
+                Toast.makeText(getBaseContext(), "No Data Available", Toast.LENGTH_LONG).show();
+
+
+        }
+
+
+    }
+
+}
+ 
+ 

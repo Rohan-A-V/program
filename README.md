@@ -42,4 +42,23 @@ _Validation rule_
 
 
 ### 4. Flight details
+##### _object : Flight_
+
+* Field Label: Source, Data Type: Text Area, make it as Required Field. 
+* Field Label: Destination, Data Type: Text Area, make it as Required Field. 
+* Field Label: Departure Timing, Data Type: Date/Time, make it as Required Field.
+
+ _Validation rule_ 
+
+* Date Time should be in Range : Departure_Timing__c<NOW ()
+* Source and destination Checking : Source__c = Destination__c 
+
+##### _object : Status_
+
+* Field Label: Flight Name, Data Type: Master-Detail Relationship, Related to: Flight. 
+ Sharing Setting: Read-Only. Leave the defaults and save. 
+* Master – Detail relationship is provided to enter status only to the existing flights. 
+* Field Label: Flight Status, Data Type: Picklist, click radio button in front of Enter 
+values, with each value separated by a new line. 
+* Values are: Arrived, Cancelled, Delayed and Departed. 
 

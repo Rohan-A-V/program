@@ -13,10 +13,20 @@ it as Case Insensitive.
 as Required Field.  
 
 _Validation rule_ 
-* Student Name Validation : NOT (REGEX (Name,"[a-z A-Z]+[a-z A-Z]+"))
-* Semester Validation  :  OR (Semester__c >8, Semester__c <=0)
-* CGPA Validation :   CGPA__c > 10 
-* USN Validation :   NOT(REGEX(USN__c,"[1-5]{1} +[A-Z]{2} + [0-9]{2} +[A-Z]{2} + [0-9]{3}"))
+* Student Name Validation : 
+
+      NOT (REGEX (Name,"[a-z A-Z]+[a-z A-Z]+"))
+             
+             
+* Semester Validation  :  
+
+      OR (Semester__c >8, Semester__c <=0)
+* CGPA Validation :   
+
+      CGPA__c > 10 
+* USN Validation :   
+
+      NOT(REGEX(USN__c,"[1-5]{1} +[A-Z]{2} + [0-9]{2} +[A-Z]{2} + [0-9]{3}"))
 
 
 ### 2. online cart
@@ -38,7 +48,9 @@ _object : Faculty_
 
 _Validation rule_ 
 
-* Name Validation :  NOT (REGEX (Name,” [a-z] [A-Z] + [ a-z] [A-Z] +”))
+* Name Validation :  
+
+      NOT (REGEX (Name,” [a-z] [A-Z] + [ a-z] [A-Z] +”))
 
 
 ### 4. Flight details
@@ -50,8 +62,12 @@ _Validation rule_
 
  _Validation rule_ 
 
-* Date Time should be in Range : Departure_Timing__c<NOW ()
-* Source and destination Checking : Source__c = Destination__c 
+* Date Time should be in Range : 
+
+      Departure_Timing__c<NOW ()
+* Source and destination Checking : 
+
+      Source__c = Destination__c 
 
 ##### _object : Status_
 

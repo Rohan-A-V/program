@@ -1,8 +1,7 @@
-activity_main.java
+activity_main.xml
 
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,182 +10,92 @@ activity_main.java
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtcounter"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="START NOTIFICATRION" />
+        android:text="COUNTER"
+        android:textSize="40dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/btnstart"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_stop"
-        android:text="STOP NOTIFICATION"/>
+        android:text="start" />
+
+    <Button
+        android:id="@+id/btnstop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stop" />
+
 </LinearLayout>
 
 
 
 
+MainActivity.java------------------------------------------------------------------------------------------------------------------
 
-MainActivity.java
 
+package com.example.lab5_cntr;
 
-package com.example.notification_064;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.content.Intent;
-        import android.view.View;
-        import android.os.Bundle;
-        import android.widget.Button;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Runnable {
+    Button btnstart, btnstop;
+    TextView txtcounter;
+    int i = 0;
+    Boolean running = false;
+    Thread thread;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button start,stop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        start=(Button) findViewById(R.id.btn_start);
-        start.setOnClickListener(this);
-        stop=(Button) findViewById(R.id.btn_stop);
-        stop.setOnClickListener(this);
+        btnstart = findViewById(R.id.btnstart);
+        btnstop = findViewById(R.id.btnstop);
+        txtcounter = findViewById(R.id.txtcounter);
+        btnstart.setOnClickListener(this);
+        btnstop.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.equals(start)){
-            Intent it=new Intent(this, ServiceClass.class);
-            startService(it);
-        }
-        else if(v.equals(stop)){
-            Intent it=new Intent(this, ServiceClass.class);
-            stopService(it);
-        }
-    }
-}
-
-
-ServiceClass.java
-
-
-package com.example.notification_064;
-
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-
-public class ServiceClass extends Service {
-    boolean running = false;
-    Mythread thread;
-
-    public void onCreate() {
-        super.onCreate();
-        Toast.makeText(getBaseContext(), "service created", Toast.LENGTH_LONG).show();
-        running = true;
-        thread = new Mythread();
-        thread.start();
-    }
-
-    public int onStartCommand(Intent intent, int flag, int startid) {
-        super.onStartCommand(intent, flag, startid);
-        Toast.makeText(getBaseContext(), "service started", Toast.LENGTH_LONG).show();
-        if (!thread.isAlive()) {
-            thread = new Mythread();
+    public void onClick(View view) {
+        if (view.equals(btnstart)) {
+            running = true;
+            thread = new Thread(this);
             thread.start();
+        } else if (view.equals(btnstop)) {
+            running = false;
         }
-        return Service.START_NOT_STICKY;
-
     }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    public void onDestroy() {
-        running = false;
-        Toast.makeText(getBaseContext(), "service stopped", Toast.LENGTH_LONG).show();
-        super.onDestroy();
-    }
-
     Handler hand = new Handler() {
         public void handleMessage(Message m) {
-            NotificationManager man = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            NotificationCompat.Builder builder= new NotificationCompat.Builder(getBaseContext());
-            builder.setContentTitle("from service");
-            builder.setContentText("hi SHIVAPRASAD"+m.what);
-            builder.setSmallIcon(R.drawable.images);
-            builder.setContentIntent(PendingIntent.getActivity(getBaseContext(),1,new Intent(getBaseContext(), MainActivity.class), Intent.FILL_IN_ACTION));
-            Notification nof=builder.build();
-            man.notify(100,nof);
-
-
+            txtcounter.setText("" + m.what);
         }
     };
-    class Mythread extends Thread
-    {
-        public void run()
-        {
-            int i=0;
-            while(running)
-            {
-                try{
-                    Thread.sleep(1000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                hand.sendEmptyMessage(i++);
+
+
+    public void run() {
+        while (i < 100 && running) {
+            try {
+                thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            hand.sendEmptyMessage(i);
+            i++;
         }
     }
 }
-
-
-
-
-
-Mainfest.xml
-
-
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/images"
-        android:label="notification 152"
-        android:roundIcon="@drawable/images"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Notification_064"
-        tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <service android:name=".ServiceClass"
-            />
-    </application>
-
-</manifest>

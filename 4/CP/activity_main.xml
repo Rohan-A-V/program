@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter date"
+        android:textAlignment="center"
+        android:textColor="@color/black">
+
+    </TextView>
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txt_date"
+    android:textAlignment="center"
+    android:textColor="@color/black"
+    >
+
+</EditText>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Enter note content"
+    android:textAlignment="center"
+    android:textColor="@color/black">
+
+</TextView>
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txt_content"
+    android:height="100dp"
+    android:textAlignment="center"
+    android:textColor="@color/black">
+
+</EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Note"
+        android:id="@+id/btn_add_note">
+
+    </Button>
+
+</LinearLayout>
+
+
+
+
+ 

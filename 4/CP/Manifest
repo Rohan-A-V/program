@@ -1,0 +1,10 @@
+</activity>
+        <provider
+            android:authorities="com.example.noteprovider"
+            android:name=".NotesProvider"
+            android:exported="true"/>
+    </application>
+    
+  
+  
+  
